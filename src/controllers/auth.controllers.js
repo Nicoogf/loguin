@@ -32,6 +32,39 @@ export const register = async (req,res) => {
    }
 }
 
-export const loguin = (req,res) => {
-    res.send('Logueo')
+export const loguin = async (req,res) => {
+  const {email, password } = req.body ;
+
+  try {  
+   const userFound = await User.findOne({email}) 
+
+   if(!userFound){
+    return res.status(400).json({message:"User not found"})
+   }
+
+   const isMatch = await bcrypt.compare( password , userFound.password) ; 
+
+   if(!isMatch) return res.status(400).json({message:"Incorrect Password"})
+
+  const token = await createAccesToken({ id: userFound.id})
+      res.cookie( 'token' , token)
+      res.json ({
+           id: userFound.id,
+           name : userFound.username,
+           email: userFound.email,
+           createAt : userFound.createdAt,
+           updateAt : userFound.updatedAt 
+       });   
+     
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({message : error.message})
+  }
+}
+
+export const logout = async (req,res) =>{
+  res.cookie('token' , '' , {
+    expires: new Date(0)
+  })
+  return res.sendStatus(200)
 }
