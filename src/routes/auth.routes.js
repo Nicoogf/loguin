@@ -1,11 +1,13 @@
 import { Router } from "express" ;
 import { logout, loguin , profile, register } from "../controllers/auth.controllers.js" ;
-import { authRequire } from "../middlewares/validateToken.js";
+import { authRequire } from "../middlewares/validateToken.js" ;
+import { validateSchema } from "../middlewares/Validator.middleware.js" ;
+import {registerSchema , loguinSchema} from "../schemas/auth.schemas.js" ;
 
 const router = Router() ;
 
-router.post('/register' , register ) ;
-router.post('/loguin' , loguin ) ;
+router.post('/register' , validateSchema(registerSchema) ,  register ) ;
+router.post('/loguin' , validateSchema(loguinSchema), loguin ) ;
 router.post('/logout' , logout) ;
 router.get('/profile' , authRequire , profile) ;
 
