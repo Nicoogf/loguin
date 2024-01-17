@@ -1,15 +1,27 @@
-import React from 'react' ;
+import React, { useEffect } from 'react' ;
 import { useForm } from "react-hook-form" ;
-import { registerRequest } from '../api/auth';
+import { useAuth } from '../context/authContext';
+import { useNavigate } from "react-router-dom" ;
 
 const RegisterPage = () => {
-    const { register , handleSubmit } = useForm()
+
+    const { register , handleSubmit } = useForm() ;
+    const {signup , isAuthenticated } = useAuth() ;
+    const navigate =  useNavigate() ;
+
+    useEffect(() => {
+      if(isAuthenticated) navigate('/task')
+    } , [isAuthenticated] )
+
+   
+
+    const onSubmit = handleSubmit(async (values) => {
+      signup(values)
+    })
+
   return (
     <div className='bg-zinc-800 max-w-md p-10 rounded-md'>
-        <form onSubmit={handleSubmit(async (values) => {
-            const res = await registerRequest(values)
-            console.log(res)
-        })}>
+        <form onSubmit={ onSubmit }>
 
             <input type='text' name="username" 
             {...register( 'username' , {required : true} )}
@@ -33,7 +45,6 @@ const RegisterPage = () => {
 
         </form>
     </div>
-  )
-}
+  )}
 
 export default RegisterPage
