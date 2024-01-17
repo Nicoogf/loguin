@@ -13,7 +13,8 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
     const [ user , setUser] = useState( null ) ;
-    const [ isAuthenticated , setisAuthenticated ] = useState( false )
+    const [ isAuthenticated , setisAuthenticated ] = useState( false ) ;
+    const [ errors , setErros ] = useState( [] )
 
     const signup = async ( user ) => {
         try {
@@ -22,7 +23,8 @@ export const AuthProvider = ({ children }) => {
             setUser(res.data)
             setisAuthenticated(true)
         } catch (error) {
-            console.log(error)
+            // console.log(error.response)
+            setErros(error.response.data)
         }
        
     }
@@ -31,7 +33,8 @@ export const AuthProvider = ({ children }) => {
         <AuthContext.Provider value={{
             signup,
             user,
-            isAuthenticated
+            isAuthenticated,
+            errors
         }}> 
             { children }    
         </AuthContext.Provider>

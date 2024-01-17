@@ -5,8 +5,11 @@ import { useNavigate } from "react-router-dom" ;
 
 const RegisterPage = () => {
 
-    const { register , handleSubmit } = useForm() ;
-    const {signup , isAuthenticated } = useAuth() ;
+    const { register , handleSubmit , 
+      formState:{
+          errors
+    } } = useForm() ;
+    const {signup , isAuthenticated , errors: registerErrors } = useAuth() ;
     const navigate =  useNavigate() ;
 
     useEffect(() => {
@@ -21,6 +24,13 @@ const RegisterPage = () => {
 
   return (
     <div className='bg-zinc-800 max-w-md p-10 rounded-md'>
+      {
+        registerErrors.map( (error, i )=>(
+              <div className='bg-red-500 p-2 text-white' key={i}> 
+                {error}
+              </div>  
+        ) )
+      }
         <form onSubmit={ onSubmit }>
 
             <input type='text' name="username" 
@@ -29,17 +39,36 @@ const RegisterPage = () => {
             placeholder='username'
             />
 
+            {
+              errors.username && (
+                <p className='text-red-500'> El username es Requerido </p>
+              )
+            }
+
             <input type='email' name="email" 
             {...register( 'email' , {required : true } )}
             className='w-full bg-zinc-700 text-white px-4 py-2 rounded-lg m-2'
             placeholder='email'
             />
 
+            { 
+              errors.email && (
+                <p className='text-red-500'> El Email es Requerido </p>
+              )
+            }
+
             <input type='password' name="password" 
             {...register ('password' , {required : true} )}
             className='w-full bg-zinc-700 text-white px-4 py-2 rounded-lg m-2'
             placeholder='password'
             />
+
+            { 
+              errors.password && (
+                <p className='text-red-500'> La contraseña es Requerida </p>
+              )
+            }
+           
 
             <button type='submit'> Registrar </button>
 
