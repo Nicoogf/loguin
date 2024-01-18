@@ -49,7 +49,7 @@ export const loguin = async (req,res) => {
    if(!isMatch) return res.status(400).json({message:"Incorrect Password"})
 
   const token = await createAccesToken({ id: userFound.id})
-      res.cookie( 'token' , token)
+      res.cookie( 'token' , token )
       res.json ({
            id: userFound.id,
            name : userFound.username,
