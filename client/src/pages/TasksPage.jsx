@@ -1,15 +1,28 @@
 import { useEffect } from "react";
-import { useTask } from "../context/TaskContext"
+import { useTasks } from "../context/TaskContext"
 
 const TasksPage = () => {
-  const { getTask } = useTask() ;
+  const { getTasks , tasks  } = useTasks() ;
 
   useEffect( () => {
-    getTask()
+    getTasks()
   } , [])
 
+  if(tasks.length === 0 ) return (<h2> No hay tareas </h2>)
+
   return (
-    <div>TasksPage</div>
+    <div>
+      {
+        tasks.map( (task ) => (
+          <div key={task.id}> 
+            <h2> {task.title} </h2>
+            <h2> {task.description} </h2>
+          </div>
+        ))
+          
+        
+      }
+    </div>
   )
 }
 

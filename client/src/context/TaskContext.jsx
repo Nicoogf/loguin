@@ -3,7 +3,7 @@ import { createTaskRequest , getTasksRequest } from "../api/tasks";
 
 const TaskContext = createContext() ;
 
-export const useTask = () => {
+export const useTasks = () => {
   const context =  useContext( TaskContext )
   if(!context) {
     throw new Error ('useTask debe usarse dentro de un TaskProvider')
@@ -15,7 +15,7 @@ export function TaskProvider ({ children }) {
 
     const [ tasks , setTasks ] = useState( [] ) ;
 
-    const getTask = async () =>{
+    const getTasks = async () =>{
         try {
             const res = await getTasksRequest()
             console.log(res) 
@@ -35,7 +35,7 @@ export function TaskProvider ({ children }) {
         <TaskContext.Provider value={{
             tasks,
             createTask,
-            getTask
+            getTasks
         }}>
             {children}
         </TaskContext.Provider>

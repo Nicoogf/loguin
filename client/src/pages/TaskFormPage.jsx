@@ -1,10 +1,10 @@
 import React from 'react' ;
 import {useForm} from "react-hook-form" 
-import { useTask } from '../context/TaskContext';
+import { useTasks } from '../context/TaskContext';
 
 const TaskFormPage = () => {
   const {register, handleSubmit } = useForm() ;
-  const {createTask} =  useTask()
+  const {createTask} =  useTasks()
 
   const onSubmit = handleSubmit((data)=> {
     createTask(data) ;

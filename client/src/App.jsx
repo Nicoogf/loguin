@@ -23,7 +23,7 @@ function App() {
             <Route  path="/register" element={<RegisterPage />} />          
 
             <Route element={ <ProtectedRoutes />}>   
-              <Route  path="/task" element={ <TasksPage/>} />   
+              <Route  path="/tasks" element={ <TasksPage/>} />   
               <Route  path="/add-task" element={<TaskFormPage />} />   
               <Route  path="/task/:id" element={<TaskFormPage />} />   
               <Route  path="/profile" element={<ProfilePage />} />   
