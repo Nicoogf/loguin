@@ -10,13 +10,16 @@ import HomePage from "./pages/HomePage";
 
 import ProtectedRoutes from "./ProtectedRoutes";
 import { TaskProvider } from "./context/TaskContext";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <AuthProvider >
       <TaskProvider >
+      
           <BrowserRouter>
-          
+         
+          <Navbar />
           <Routes>           
             <Route  path="/" element={<HomePage />} />   
             <Route  path="/loguin" element={<LoguinPage />} />   
@@ -30,7 +33,10 @@ function App() {
             </Route>
           </Routes>
           
+          
+          
           </BrowserRouter>  
+       
       </TaskProvider>   
     </AuthProvider>
   )
