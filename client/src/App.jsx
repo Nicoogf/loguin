@@ -19,7 +19,8 @@ function App() {
       
           <BrowserRouter>
          
-          <Navbar />
+         <main className="container mx-auto px-10">
+         <Navbar />
           <Routes>           
             <Route  path="/" element={<HomePage />} />   
             <Route  path="/loguin" element={<LoguinPage />} />   
@@ -32,6 +33,7 @@ function App() {
               <Route  path="/profile" element={<ProfilePage />} />   
             </Route>
           </Routes>
+         </main>
           
           
           
