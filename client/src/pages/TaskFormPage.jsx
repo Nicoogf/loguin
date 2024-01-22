@@ -22,7 +22,11 @@ const TaskFormPage = () => {
   }, [] )
   
   const onSubmit = handleSubmit((data)=> {
-    createTask(data) ;
+    if(params.id){
+
+    }else{
+      createTask(data) ;
+    }   
     navigate("/tasks")
   })
 

@@ -40,13 +40,19 @@ export function TaskProvider ({ children }) {
     }
 
     const getTask = async(id) => {
-     try {
-        const res =  getTaskRequest(id) ;
-        return res.data
-     } catch (error) {
-        console.log(error)  
-     }
+        try {
+          const res = await getTaskRequest(id)
+          return res.data
+        } catch (error) {
+           console.error(error) 
+        }
+    
     } 
+
+    const updateTask = async( id , task )=> {
+
+    }
+     
 
 
     return(

@@ -12,7 +12,7 @@ const TaskCard = ( {task} ) => {
             <button onClick={()=> {
                 deleteTask(task._id)
             }}>Eliminar</button>
-            <Link to = {`/task/${task._id}`}>Editar</Link>
+            <Link to = {`/tasks/${task._id}`}>Editar</Link>
         </div>
     </header>
         
