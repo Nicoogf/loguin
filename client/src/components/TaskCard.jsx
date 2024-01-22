@@ -1,5 +1,6 @@
 import React from 'react'
 import { useTasks } from '../context/TaskContext'
+import { Link } from 'react-router-dom'
 
 const TaskCard = ( {task} ) => {
   const { deleteTask } = useTasks()
@@ -11,7 +12,7 @@ const TaskCard = ( {task} ) => {
             <button onClick={()=> {
                 deleteTask(task._id)
             }}>Eliminar</button>
-            <button>Editar</button>
+            <Link to = {`/task/${task._id}`}>Editar</Link>
         </div>
     </header>
         
